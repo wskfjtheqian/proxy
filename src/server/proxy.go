@@ -4,6 +4,7 @@ import (
 	"io"
 	"net"
 	"sync"
+	"webrtc_proxy/src/public"
 )
 
 type Proxy struct {
@@ -47,7 +48,7 @@ func (p *Proxy) Open() error {
 			_ = p.onClose(p.id)
 		}()
 		for {
-			buf := make([]byte, 10240)
+			buf := make([]byte, public.BufferSize)
 			n, err := p.conn.Read(buf)
 			if err != nil && err == io.EOF {
 				return
