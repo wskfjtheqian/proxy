@@ -29,4 +29,4 @@ const MessageTypeDataRequest = 0xFF102203
 const MessageTypeDataResponse = 0xFF202203
 
 // 缓冲区大小
-const BufferSize = 1024 * 1024 // 10MB
+const BufferSize = 1024 * 20
