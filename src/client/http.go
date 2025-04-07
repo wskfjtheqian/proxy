@@ -13,7 +13,7 @@ type Http struct {
 
 type Option func(*Http)
 
-func WithUrl(url string) Option {
+func WithBaseUrl(url string) Option {
 	return func(h *Http) {
 		h.baseUrl = url
 	}

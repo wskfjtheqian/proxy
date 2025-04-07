@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-var testData = make([]byte, 1024*1024*1024)
+var testData = make([]byte, 1024*1024)
 
 func init() {
 	for i := 0; i < len(testData); i++ {

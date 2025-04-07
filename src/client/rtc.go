@@ -22,7 +22,7 @@ type RTC struct {
 	iceGatheringState chan webrtc.ICEGathererState
 
 	close        chan struct{}
-	channelCount int
+	channelCount uint
 
 	channel     []*webrtc.DataChannel
 	channelLock sync.RWMutex
@@ -45,7 +45,7 @@ type RTC struct {
 
 type RTCOption func(*RTC)
 
-func WithChannelCount(count int) RTCOption {
+func WithChannelCount(count uint) RTCOption {
 	return func(c *RTC) {
 		c.channelCount = count
 	}
@@ -89,7 +89,7 @@ func (r *RTC) Run() error {
 	peerConnection.OnICECandidate(r.onICECandidate)
 	peerConnection.OnICEGatheringStateChange(r.onICEGatheringStateChange)
 
-	for i := 0; i < r.channelCount; i++ {
+	for i := 0; i < int(r.channelCount); i++ {
 		channel, err := peerConnection.CreateDataChannel("data"+fmt.Sprintf("%d", i+1), nil)
 		if err != nil {
 			return err
