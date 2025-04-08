@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
@@ -19,25 +20,27 @@ type Config struct {
 func main() {
 	log.Printf("%s version: %s", NAME, VERSION)
 
-	file, err := os.Open("config.yml")
+	configFile := flag.String("config", "config.yml", "path to config file")
+	flag.Parse()
+
+	file, err := os.Open(*configFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
 
 	cfg := Config{}
-	err = yaml.NewDecoder(file).Decode(cfg)
+	err = yaml.NewDecoder(file).Decode(&cfg)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if len(cfg.BaseUrl) == 0 {
-		log.Fatal("base url is required")
+		log.Fatal("base_url is not set in config.yml")
 	}
 
 	http := client.NewHttp(
 		client.WithBaseUrl(cfg.BaseUrl),
-		//client.WithUrl("https://kpohss--9090.ap-guangzhou.cloudstudio.work"),
 	)
 
 	if cfg.ChannelCount == 0 {

@@ -1,0 +1,5 @@
+proxy_addr:
+  ":8916": "127.0.0.1:8916"
+
+#base_url: "https://kpohss--9090.ap-guangzhou.cloudstudio.work"
+base_url: "http://localhost:8089"
