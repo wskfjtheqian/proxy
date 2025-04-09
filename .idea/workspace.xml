@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="374eb46b-ce93-42b2-b56a-bc1008d02f34" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/proxy.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/client/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/client/config.yml" afterDir="false" />
+    <list default="true" id="374eb46b-ce93-42b2-b56a-bc1008d02f34" name="Changes" comment="feat(test): add build test for all platforms&#10;fix(cmd/client/config.yml): update proxy and base URL&#10;refactor(src/client/rtc.go, src/server/rtc.go): improve channel management and add error handling&#10;refactor(.idea/misc.xml, .idea/modules.xml, .idea/vcs.xml): update IDE project settings&#10;refactor(.idea): remove unused files and update project structure">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/rtc.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/rtc.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/rtc.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/rtc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signal/websocket.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/signal/websocket.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +16,12 @@
   </component>
   <component name="GOROOT" url="file://D:/sdk/go" />
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
@@ -36,7 +35,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Go Build.go build webrtc_proxy/cmd/client.executor": "Run",
+    "Go Build.go build webrtc_proxy/cmd/client.executor": "Debug",
     "Go Test.TestBuildAll in webrtc_proxy.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
@@ -64,7 +63,7 @@
       <recent name="E:\develop\proxy" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build webrtc_proxy/cmd/client">
+  <component name="RunManager" selected="Go Test.TestBuildAll in webrtc_proxy">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="proxy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -111,8 +110,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build webrtc_proxy/cmd/client" />
         <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
+        <item itemvalue="Go Build.go build webrtc_proxy/cmd/client" />
       </list>
     </recent_temporary>
   </component>
@@ -132,8 +131,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744173141346</updated>
-      <workItem from="1744173143896" duration="6648000" />
+      <workItem from="1744173143896" duration="7085000" />
     </task>
+    <task id="LOCAL-00001" summary="feat(test): add build test for all platforms&#10;fix(cmd/client/config.yml): update proxy and base URL&#10;refactor(src/client/rtc.go, src/server/rtc.go): improve channel management and add error handling&#10;refactor(.idea/misc.xml, .idea/modules.xml, .idea/vcs.xml): update IDE project settings&#10;refactor(.idea): remove unused files and update project structure">
+      <option name="closed" value="true" />
+      <created>1744193802534</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744193802534</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +157,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(test): add build test for all platforms&#10;fix(cmd/client/config.yml): update proxy and base URL&#10;refactor(src/client/rtc.go, src/server/rtc.go): improve channel management and add error handling&#10;refactor(.idea/misc.xml, .idea/modules.xml, .idea/vcs.xml): update IDE project settings&#10;refactor(.idea): remove unused files and update project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(test): add build test for all platforms&#10;fix(cmd/client/config.yml): update proxy and base URL&#10;refactor(src/client/rtc.go, src/server/rtc.go): improve channel management and add error handling&#10;refactor(.idea/misc.xml, .idea/modules.xml, .idea/vcs.xml): update IDE project settings&#10;refactor(.idea): remove unused files and update project structure" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
