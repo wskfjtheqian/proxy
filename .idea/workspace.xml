@@ -4,31 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="374eb46b-ce93-42b2-b56a-bc1008d02f34" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/proxy.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="374eb46b-ce93-42b2-b56a-bc1008d02f34" name="Changes" comment="refactor: improve channel management and update project structure">
+      <change afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/server.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/signal.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/channel/transfer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/channel/webrtc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/proxy/proxy.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/proxy/tcp.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signal/http.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signal/signal.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signal/websocket.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/transfer/transfer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/client/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/client/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/rtc.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/rtc.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/rtc.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/rtc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signal/websocket.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/signal/websocket.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
   <component name="GOROOT" url="file://D:/sdk/go" />
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2vTdkJe7Pt2rcoPmmlIa5Ux7RGT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,17 +62,22 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Go Build.go build webrtc_proxy/cmd/client.executor": "Run",
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build webrtc_proxy/cmd.executor": "Debug",
+    "Go Build.go build webrtc_proxy/cmd/client.executor": "Debug",
+    "Go Build.server.executor": "Debug",
+    "Go Build.signal.executor": "Debug",
     "Go Test.TestBuildAll in webrtc_proxy.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "v2.0.0",
     "go.import.settings.migrated": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/develop/proxy/cmd/client",
+    "last_opened_file_path": "E:/develop/proxy/cmd",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,29 +90,40 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\develop\proxy\cmd" />
       <recent name="E:\develop\proxy\cmd\client" />
       <recent name="E:\develop\proxy\bin" />
       <recent name="E:\develop\proxy" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build webrtc_proxy/cmd/client">
+  <component name="RunManager" selected="Go Build.server">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="proxy" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
-      <kind />
+      <kind value="FILE" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build webrtc_proxy/cmd/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="server" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="proxy" />
       <working_directory value="$PROJECT_DIR$" />
-      <parameters value="-config E:\develop\proxy\cmd\client\config.yml" />
+      <parameters value="-config E:\develop\proxy\cmd\server.yaml" />
       <kind value="PACKAGE" />
-      <package value="webrtc_proxy/cmd/client" />
+      <package value="webrtc_proxy/cmd" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/cmd/client/main.go" />
+      <filePath value="$PROJECT_DIR$/cmd/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="signal" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+      <module name="proxy" />
+      <working_directory value="$PROJECT_DIR$" />
+      <parameters value="-config  E:\develop\proxy\cmd\signal.yaml" />
+      <kind value="PACKAGE" />
+      <package value="webrtc_proxy/cmd" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/cmd/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="TestBuildAll in webrtc_proxy" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -99,19 +141,20 @@
       <module name="proxy" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
-      <kind />
+      <kind value="DIRECTORY" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.go build webrtc_proxy/cmd/client" />
+      <item itemvalue="Go Build.server" />
+      <item itemvalue="Go Build.signal" />
       <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build webrtc_proxy/cmd/client" />
+        <item itemvalue="Go Build.signal" />
         <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
       </list>
     </recent_temporary>
@@ -132,8 +175,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744173141346</updated>
-      <workItem from="1744173143896" duration="6648000" />
+      <workItem from="1744173143896" duration="7512000" />
+      <workItem from="1744254675701" duration="26156000" />
     </task>
+    <task id="LOCAL-00001" summary="feat(test): add build test for all platforms&#10;fix(cmd/client/config.yml): update proxy and base URL&#10;refactor(src/client/rtc.go, src/server/rtc.go): improve channel management and add error handling&#10;refactor(.idea/misc.xml, .idea/modules.xml, .idea/vcs.xml): update IDE project settings&#10;refactor(.idea): remove unused files and update project structure">
+      <option name="closed" value="true" />
+      <created>1744193802534</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744193802534</updated>
+    </task>
+    <task id="LOCAL-00002" summary="refactor: improve channel management and update project structure">
+      <option name="closed" value="true" />
+      <created>1744194047680</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744194047680</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,8 +211,49 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(test): add build test for all platforms&#10;fix(cmd/client/config.yml): update proxy and base URL&#10;refactor(src/client/rtc.go, src/server/rtc.go): improve channel management and add error handling&#10;refactor(.idea/misc.xml, .idea/modules.xml, .idea/vcs.xml): update IDE project settings&#10;refactor(.idea): remove unused files and update project structure" />
+    <MESSAGE value="refactor: improve channel management and update project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: improve channel management and update project structure" />
+  </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/signal/websocket.go</url>
+          <line>250</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/signal/websocket.go</url>
+          <line>219</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/signal/websocket.go</url>
+          <line>255</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/signal/websocket.go</url>
+          <line>233</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/signal/websocket.go</url>
+          <line>208</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/signal/websocket.go</url>
+          <line>179</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -277,8 +277,8 @@ func (r *RTC) onWrite(id uint32, bytes []byte) error {
 	defer func() {
 		r.dataLock.Lock()
 		delete(r.dataRequests, id)
+		close(response)
 		r.dataLock.Unlock()
-		defer close(response)
 	}()
 
 	if err := r.getChannel().Send(data); err != nil {

@@ -1,0 +1,4 @@
+signal:
+  addr: ":8080"
+  user_pass:
+    "admin": "password"

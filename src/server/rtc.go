@@ -61,7 +61,6 @@ func (r *RTC) OnOfferAndIceCandidate(oic public.OfferAndICECandidates) (*public.
 
 	peerConnection.OnDataChannel(func(channel *webrtc.DataChannel) {
 		channel.OnMessage(r.onMessage)
-		channel.OnMessage(r.onMessage)
 		channel.OnClose(func() {
 			println("Data channel closed:" + channel.Label())
 			r.onRmoveChannel(channel)
@@ -245,8 +244,8 @@ func (r *RTC) onWrite(id uint32, bytes []byte) error {
 	defer func() {
 		r.dataLock.Lock()
 		delete(r.dataRequests, id)
+		close(response)
 		r.dataLock.Unlock()
-		defer close(response)
 	}()
 
 	if err := r.getChannel().Send(data); err != nil {
