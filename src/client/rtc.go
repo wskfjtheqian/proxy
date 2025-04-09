@@ -20,27 +20,21 @@ type RPCInterface interface {
 type RTC struct {
 	iceList           []webrtc.ICECandidateInit
 	iceGatheringState chan webrtc.ICEGathererState
-
-	close        chan struct{}
-	channelCount uint
-
-	channel     []*webrtc.DataChannel
-	channelLock sync.RWMutex
-
-	proxy     map[uint32]*Proxy
-	proxyLock sync.RWMutex
-
-	rpcInterface RPCInterface
-	id           atomic.Uint32
-
-	openResponses map[uint32]chan string
-	openLock      sync.RWMutex
-
-	closeResponses map[uint32]chan string
-	closeLock      sync.RWMutex
-
-	dataRequests map[uint32]chan string
-	dataLock     sync.RWMutex
+	isClosed          atomic.Bool
+	close             chan struct{}
+	channelCount      uint
+	channel           []*webrtc.DataChannel
+	channelLock       sync.RWMutex
+	proxy             map[uint32]*Proxy
+	proxyLock         sync.RWMutex
+	rpcInterface      RPCInterface
+	id                atomic.Uint32
+	openResponses     map[uint32]chan string
+	openLock          sync.RWMutex
+	closeResponses    map[uint32]chan string
+	closeLock         sync.RWMutex
+	dataRequests      map[uint32]chan string
+	dataLock          sync.RWMutex
 }
 
 type RTCOption func(*RTC)
@@ -88,6 +82,12 @@ func (r *RTC) Run() error {
 
 	peerConnection.OnICECandidate(r.onICECandidate)
 	peerConnection.OnICEGatheringStateChange(r.onICEGatheringStateChange)
+	peerConnection.OnConnectionStateChange(func(state webrtc.PeerConnectionState) {
+		println("Connection state changed:" + state.String())
+		if state == webrtc.PeerConnectionStateClosed || state == webrtc.PeerConnectionStateFailed || state == webrtc.PeerConnectionStateDisconnected {
+			r.Close()
+		}
+	})
 
 	for i := 0; i < int(r.channelCount); i++ {
 		channel, err := peerConnection.CreateDataChannel("data"+fmt.Sprintf("%d", i+1), nil)
@@ -98,20 +98,17 @@ func (r *RTC) Run() error {
 		channel.OnMessage(r.onMessage)
 		channel.OnClose(func() {
 			println("Data channel closed:" + channel.Label())
-			r.channelLock.Lock()
-			for i, l := range r.channel {
-				if l == channel {
-					r.channel = append(r.channel[:i], r.channel[i+1:]...)
-					break
-				}
-			}
-			r.channelLock.Unlock()
+			r.onRmoveChannel(channel)
 		})
 		channel.OnOpen(func() {
 			println("Data channel opened:" + channel.Label())
 			r.channelLock.Lock()
 			r.channel = append(r.channel, channel)
 			r.channelLock.Unlock()
+		})
+		channel.OnError(func(err error) {
+			println("Data channel error:" + channel.Label() + err.Error())
+			r.onRmoveChannel(channel)
 		})
 	}
 
@@ -161,7 +158,28 @@ func (r *RTC) onICECandidate(candidate *webrtc.ICECandidate) {
 }
 
 func (r *RTC) Close() {
+	if r.isClosed.Swap(true) {
+		return
+	}
+
 	close(r.close)
+	r.dataLock.RLock()
+	for _, response := range r.dataRequests {
+		response <- "close"
+	}
+	r.dataLock.RUnlock()
+
+	r.openLock.RLock()
+	for _, response := range r.openResponses {
+		response <- "close"
+	}
+	r.openLock.RUnlock()
+
+	r.closeLock.RLock()
+	for _, response := range r.closeResponses {
+		response <- "close"
+	}
+	r.closeLock.RUnlock()
 }
 
 func (r *RTC) onICEGatheringStateChange(state webrtc.ICEGathererState) {
@@ -361,4 +379,15 @@ func (r *RTC) onClose(id uint32) error {
 	delete(r.proxy, id)
 	r.proxyLock.Unlock()
 	return nil
+}
+
+func (r *RTC) onRmoveChannel(channel *webrtc.DataChannel) {
+	r.channelLock.Lock()
+	for i, c := range r.channel {
+		if c == channel {
+			r.channel = append(r.channel[:i], r.channel[i+1:]...)
+			break
+		}
+	}
+	r.channelLock.Unlock()
 }
