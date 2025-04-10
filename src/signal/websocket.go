@@ -93,7 +93,7 @@ func (w *WebSocket) ServeHTTP(writer http.ResponseWriter, request *http.Request)
 
 func (w *WebSocket) read() error {
 	if w.onOpen != nil {
-		w.onOpen()
+		go w.onOpen()
 	}
 	defer func() {
 		if w.onClose != nil {
@@ -106,10 +106,13 @@ func (w *WebSocket) read() error {
 		if err != nil {
 			return err
 		}
-		err = w.onMessage(msg)
-		if err != nil {
-			log.Println(err)
-		}
+		go func() {
+			err = w.onMessage(msg)
+			if err != nil {
+				log.Println(err)
+			}
+		}()
+
 	}
 }
 
@@ -189,6 +192,7 @@ func (w *WebSocket) onMessage(msg Message) error {
 			if err != nil {
 				return w.writeResponse(msg.Id, msg.Event, nil, err)
 			}
+			return w.writeResponse(msg.Id, msg.Event, nil, nil)
 		case "send-signal":
 			var request RequestSignal
 			err := json.Unmarshal(msg.Data, &request)
@@ -219,11 +223,10 @@ func (w *WebSocket) onMessage(msg Message) error {
 func (w *WebSocket) writeRequest(event string, data []byte) (json.RawMessage, error) {
 	id := w.id.Add(1)
 	msg := Message{
-		Type:   "request",
-		Event:  event,
-		Id:     id,
-		Status: "ok",
-		Data:   json.RawMessage(data),
+		Type:  "request",
+		Event: event,
+		Id:    id,
+		Data:  json.RawMessage(data),
 	}
 
 	w.responseLock.Lock()
@@ -246,13 +249,16 @@ func (w *WebSocket) writeRequest(event string, data []byte) (json.RawMessage, er
 		return nil, err
 	}
 
+	timer := time.NewTimer(30 * time.Second)
+	defer timer.Stop()
+
 	select {
 	case response := <-w.responseMap[id]:
 		if response.Status != "ok" {
 			return nil, errors.New(response.Status)
 		}
 		return response.Data, nil
-	case <-time.After(30 * time.Second):
+	case <-timer.C:
 		return nil, errors.New("timeout")
 	}
 }

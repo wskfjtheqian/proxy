@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/pion/webrtc/v3"
 	"log"
+	"strconv"
 	"sync"
 )
 
@@ -47,7 +48,7 @@ func (w *WebRTCChannel) Request() error {
 	}
 
 	for i := uint(0); i < w.channelCount; i++ {
-		channel, err := w.peerConnection.CreateDataChannel("dataChannel"+string(i), nil)
+		channel, err := w.peerConnection.CreateDataChannel("dataChannel"+strconv.Itoa(int(i)), nil)
 		if err != nil {
 			return err
 		}
@@ -83,10 +84,6 @@ func (w *WebRTCChannel) Request() error {
 		if err = w.peerConnection.AddICECandidate(candidate); err != nil {
 			return err
 		}
-	}
-
-	if err = w.peerConnection.Close(); err != nil {
-		return err
 	}
 	return nil
 }
@@ -168,7 +165,7 @@ func (w *WebRTCChannel) newPeerConnection() error {
 }
 
 func (w *WebRTCChannel) Close() error {
-	if w.peerConnection != nil {
+	if w.peerConnection != nil && w.peerConnection.ConnectionState() != webrtc.PeerConnectionStateClosed {
 		w.peerConnection = nil
 		err := w.peerConnection.Close()
 		if err != nil {

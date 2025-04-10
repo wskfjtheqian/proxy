@@ -118,7 +118,7 @@ func (a *App) startProxy() {
 			return a.channel.Response(candidates)
 		})
 		ws.OnConnect(func(deviceId string) error {
-			return a.channel.Request()
+			return nil
 		})
 		ws.OnOpen(func() {
 			log.Println("signal websocket connected " + parse.String())
@@ -126,6 +126,10 @@ func (a *App) startProxy() {
 				err := ws.Connect(config.TargetDeviceID)
 				if err != nil {
 					log.Println(err.Error())
+					return
+				}
+				err = a.channel.Request()
+				if err != nil {
 					return
 				}
 			}

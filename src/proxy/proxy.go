@@ -12,16 +12,13 @@ type Proxy struct {
 }
 
 func (p Proxy) OnData(data []byte) error {
-	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
 func (p Proxy) Open(addr string) error {
-	//TODO implement me
-	panic("implement me")
+	return p.Transfer.Open(addr)
 }
 
 func (p Proxy) Close() error {
-	//TODO implement me
-	panic("implement me")
+	return nil
 }
