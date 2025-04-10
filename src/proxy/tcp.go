@@ -1,7 +1,6 @@
 package proxy
 
 import (
-	"io"
 	"net"
 	"sync"
 	"webrtc_proxy/src/transfer"
@@ -50,7 +49,7 @@ func (p *TCPProxy) ReadWriteData() {
 		for {
 			buf := make([]byte, 1024*10)
 			n, err := p.conn.Read(buf)
-			if err != nil && err != io.EOF {
+			if err != nil {
 				return
 			}
 			err = p.transfer.Write(p.proxyId, buf[:n])

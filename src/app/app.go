@@ -197,7 +197,8 @@ func (a *App) Close(proxyId uint64) error {
 	defer a.proxyLock.Unlock()
 	if p, ok := a.proxyMap[proxyId]; ok {
 		delete(a.proxyMap, proxyId)
-		return p.Close()
+		_ = p.Close()
+		return nil
 	}
 	return fmt.Errorf("proxy not found")
 }

@@ -4,28 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fb05d35-95e3-4557-97c5-13fcd48bb8d6" name="Changes" comment="fix(app/webrtc): 修复连接处理和数据通道创建问题&#10;feat(cmd/server1.yaml): 添加新的服务器配置文件&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/build_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/client/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/client/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/server.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/server/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/server/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+    <list default="true" id="0fb05d35-95e3-4557-97c5-13fcd48bb8d6" name="Changes" comment="refactor(app): 重构App结构和TCP代理逻辑&#10;feat(cmd/server.yaml): 添加TCP代理配置&#10;test: 更新测试用例以适应新逻辑&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置&#10;chore(go.mod): 更新Go版本到1.22.10">
       <change beforePath="$PROJECT_DIR$/src/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/channel/transfer.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/channel/webrtc.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/channel/webrtc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/http.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/proxy.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/rtc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proxy/proxy.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/proxy/tcp.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/proxy/tcp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/public.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/http.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/proxy.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/rtc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transfer/transfer.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/transfer/transfer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/proxy_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/proxy_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,11 +32,11 @@
     "Go Build.go build webrtc_proxy/cmd.executor": "Debug",
     "Go Build.server.executor": "Debug",
     "Go Build.server1.executor": "Debug",
-    "Go Build.signal.executor": "Debug",
+    "Go Build.signal.executor": "Run",
     "Go Test.TestBuildAll in webrtc_proxy.executor": "Debug",
     "Go Test.TestProxy in webrtc_proxy/test.executor": "Debug",
-    "Go Test.TestProxy1 in webrtc_proxy/test.executor": "Debug",
-    "Go Test.TestServer in webrtc_proxy/test.executor": "Debug",
+    "Go Test.TestProxy1 in webrtc_proxy/test.executor": "Run",
+    "Go Test.TestServer in webrtc_proxy/test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
@@ -80,7 +61,7 @@
       <recent name="$PROJECT_DIR$/cmd" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestProxy1 in webrtc_proxy/test">
+  <component name="RunManager" selected="Go Test.TestProxy in webrtc_proxy/test">
     <configuration name="server" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="webrtc_proxy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -169,8 +150,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestProxy1 in webrtc_proxy/test" />
         <item itemvalue="Go Test.TestProxy in webrtc_proxy/test" />
+        <item itemvalue="Go Test.TestProxy1 in webrtc_proxy/test" />
         <item itemvalue="Go Test.TestServer in webrtc_proxy/test" />
         <item itemvalue="Go Build.signal" />
         <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
@@ -193,7 +174,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744298662736</updated>
-      <workItem from="1744298665922" duration="10622000" />
+      <workItem from="1744298665922" duration="12014000" />
     </task>
     <task id="LOCAL-00001" summary="fix(app/webrtc): 修复连接处理和数据通道创建问题&#10;feat(cmd/server1.yaml): 添加新的服务器配置文件&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置">
       <option name="closed" value="true" />
@@ -203,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744301562339</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="refactor(app): 重构App结构和TCP代理逻辑&#10;feat(cmd/server.yaml): 添加TCP代理配置&#10;test: 更新测试用例以适应新逻辑&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置&#10;chore(go.mod): 更新Go版本到1.22.10">
+      <option name="closed" value="true" />
+      <created>1744309404738</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744309404738</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +200,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix(app/webrtc): 修复连接处理和数据通道创建问题&#10;feat(cmd/server1.yaml): 添加新的服务器配置文件&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(app/webrtc): 修复连接处理和数据通道创建问题&#10;feat(cmd/server1.yaml): 添加新的服务器配置文件&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置" />
+    <MESSAGE value="refactor(app): 重构App结构和TCP代理逻辑&#10;feat(cmd/server.yaml): 添加TCP代理配置&#10;test: 更新测试用例以适应新逻辑&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置&#10;chore(go.mod): 更新Go版本到1.22.10" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(app): 重构App结构和TCP代理逻辑&#10;feat(cmd/server.yaml): 添加TCP代理配置&#10;test: 更新测试用例以适应新逻辑&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置&#10;chore(go.mod): 更新Go版本到1.22.10" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
