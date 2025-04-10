@@ -1,6 +1,6 @@
 module webrtc_proxy
 
-go 1.21
+go 1.22.10
 
 require (
 	github.com/pion/webrtc/v3 v3.3.5

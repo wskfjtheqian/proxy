@@ -2,29 +2,39 @@ package app
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"net"
 	"net/url"
 	"os"
 	osSignal "os/signal"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"syscall"
 	"time"
 	"webrtc_proxy/src/channel"
 	"webrtc_proxy/src/proxy"
 	"webrtc_proxy/src/signal"
+	"webrtc_proxy/src/transfer"
 )
-
-type App struct {
-	signal  *signal.Signal
-	config  *Config
-	channel *channel.WebRTCChannel
-	proxy   *proxy.Proxy
-}
 
 func NewApp(config *Config) *App {
 	return &App{
-		config: config,
+		config:    config,
+		proxyMap:  make(map[uint64]*proxy.TCPProxy),
+		proxyLock: sync.RWMutex{},
 	}
+}
+
+type App struct {
+	signal    *signal.Signal
+	config    *Config
+	channel   *channel.WebRTCChannel
+	transfer  *transfer.Transfer
+	proxyMap  map[uint64]*proxy.TCPProxy
+	proxyLock sync.RWMutex
+	proxyId   atomic.Uint64
 }
 
 func (a *App) Run() {
@@ -58,13 +68,6 @@ func (a *App) stop() {
 			log.Println("close channel error:", err)
 		}
 	}
-
-	if a.proxy != nil {
-		err := a.proxy.Close()
-		if err != nil {
-			log.Println("close proxy error:", err)
-		}
-	}
 }
 
 func (a *App) start() {
@@ -96,7 +99,12 @@ func (a *App) startProxy() {
 
 	log.Println("start proxy")
 
-	a.proxy = proxy.NewProxy()
+	a.transfer = transfer.NewTransfer(a, func(data []byte) error {
+		if a.channel == nil {
+			return fmt.Errorf("No data channel available")
+		}
+		return a.channel.Send(data)
+	})
 
 	if 0 == strings.Index(config.SignalAddr, "ws://") || 0 == strings.Index(config.SignalAddr, "wss://") {
 		parse, err := url.Parse(config.SignalAddr)
@@ -109,7 +117,7 @@ func (a *App) startProxy() {
 		query.Set("deviceId", a.config.DeviceId)
 
 		ws := signal.NewWebSocket(a.config.DeviceId)
-		a.channel = channel.NewWebRTCChannel(a.config.DeviceId, a.proxy)
+		a.channel = channel.NewWebRTCChannel(a.config.DeviceId, a.transfer)
 
 		a.channel.RequestSignal(func(candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
 			return ws.RequestSignal(config.TargetDeviceID, candidates)
@@ -147,4 +155,74 @@ func (a *App) startProxy() {
 		log.Fatalln("unsupported signal addr:", config.SignalAddr)
 	}
 
+	if len(config.TcpProxy) > 0 {
+		for src, dest := range config.TcpProxy {
+			go func() {
+				err := a.listenTcpProxy(src, dest)
+				if err != nil {
+					log.Println(err.Error())
+				}
+			}()
+		}
+	}
+}
+
+func (a *App) OnData(proxyId uint64, data []byte) (int, error) {
+	a.proxyLock.RLock()
+	p, ok := a.proxyMap[proxyId]
+	a.proxyLock.RUnlock()
+
+	if ok {
+		return p.Write(data)
+	}
+	return 0, fmt.Errorf("proxy not found")
+}
+
+func (a *App) Open(proxyId uint64, addr string) error {
+	conn, err := net.Dial("tcp", addr)
+	if err != nil {
+		return err
+	}
+	p := proxy.NewTCPProxy(proxyId, conn, addr, a.transfer)
+	p.ReadWriteData()
+
+	a.proxyLock.Lock()
+	a.proxyMap[proxyId] = p
+	a.proxyLock.Unlock()
+	return nil
+}
+
+func (a *App) Close(proxyId uint64) error {
+	a.proxyLock.Lock()
+	defer a.proxyLock.Unlock()
+	if p, ok := a.proxyMap[proxyId]; ok {
+		delete(a.proxyMap, proxyId)
+		return p.Close()
+	}
+	return fmt.Errorf("proxy not found")
+}
+
+func (a *App) listenTcpProxy(src string, dest string) error {
+	listen, err := net.Listen("tcp", src)
+	if err != nil {
+		return err
+	}
+	for {
+		conn, err := listen.Accept()
+		if err != nil {
+			return err
+		}
+
+		proxyId := a.proxyId.Add(1)
+		p := proxy.NewTCPProxy(proxyId, conn, dest, a.transfer)
+		err = p.Open()
+		if err != nil {
+			return conn.Close()
+		}
+		p.ReadWriteData()
+
+		a.proxyLock.Lock()
+		a.proxyMap[proxyId] = p
+		a.proxyLock.Unlock()
+	}
 }

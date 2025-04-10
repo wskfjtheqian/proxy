@@ -4,9 +4,14 @@ import (
 	"fmt"
 	"github.com/pion/webrtc/v3"
 	"log"
+	"math/rand"
 	"strconv"
 	"sync"
 )
+
+type Transfer interface {
+	OnData(data []byte) error
+}
 
 type SendSignal func(*SessionAndICECandidates) (*SessionAndICECandidates, error)
 
@@ -30,7 +35,7 @@ type WebRTCChannel struct {
 func NewWebRTCChannel(deviceId string, transfer Transfer) *WebRTCChannel {
 	ret := &WebRTCChannel{
 		deviceId:          deviceId,
-		channelCount:      10,
+		channelCount:      1,
 		iceList:           make([]webrtc.ICECandidateInit, 0),
 		iceGatheringState: make(chan webrtc.ICEGathererState),
 		channel:           make([]*webrtc.DataChannel, 0),
@@ -153,10 +158,7 @@ func (w *WebRTCChannel) newPeerConnection() error {
 	peerConnection.OnConnectionStateChange(func(state webrtc.PeerConnectionState) {
 		log.Println("Connection state changed:" + state.String())
 		if state == webrtc.PeerConnectionStateClosed || state == webrtc.PeerConnectionStateFailed || state == webrtc.PeerConnectionStateDisconnected {
-			err := w.Close()
-			if err != nil {
-				log.Println("Error closing peer connection:", err)
-			}
+
 		}
 	})
 
@@ -211,4 +213,14 @@ func (w *WebRTCChannel) onRemoveChannel(channel *webrtc.DataChannel) {
 
 func (w *WebRTCChannel) RequestSignal(signal func(candidates *SessionAndICECandidates) (*SessionAndICECandidates, error)) {
 	w.sendSignal = signal
+}
+
+func (w *WebRTCChannel) Send(data []byte) error {
+	w.channelLock.Lock()
+	defer w.channelLock.Unlock()
+	if len(w.channel) == 0 {
+		return fmt.Errorf("No data channel available")
+	}
+
+	return w.channel[rand.Intn(len(w.channel))].Send(data)
 }

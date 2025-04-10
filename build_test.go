@@ -90,13 +90,7 @@ func TestBuildAll(t *testing.T) {
 
 	for _, config := range list {
 		t.Log("Building server for " + config.GOOS + "/" + config.GOARCH)
-		err := build(t, "./bin/server_"+config.GOOS+"_"+config.GOARCH+config.Ext, "./cmd/server", "GOOS="+config.GOOS, "GOARCH="+config.GOARCH, "CGO_ENABLED=0")
-		if err != nil {
-			t.Error(err)
-		}
-
-		t.Log("Building client for " + config.GOOS + "/" + config.GOARCH)
-		err = build(t, "./bin/client_"+config.GOOS+"_"+config.GOARCH+config.Ext, "./cmd/client", "GOOS="+config.GOOS, "GOARCH="+config.GOARCH, "CGO_ENABLED=0")
+		err := build(t, "./bin/proxy_"+config.GOOS+"_"+config.GOARCH+config.Ext, "./cmd", "GOOS="+config.GOOS, "GOARCH="+config.GOARCH, "CGO_ENABLED=0")
 		if err != nil {
 			t.Error(err)
 		}

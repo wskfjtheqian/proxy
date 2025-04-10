@@ -4,4 +4,6 @@ proxy:
   username: "admin"
   password: "password"
   target_device_id: "server-id-2"
+  tcp_proxy:
+    ":18081": "localhost:18080"
 

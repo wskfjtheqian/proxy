@@ -17,17 +17,32 @@ func init() {
 
 func TestServer(t *testing.T) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		for i := 0; i < 1024; i++ {
-			w.Write(testData)
-		}
+		//for i := 0; i < 1024; i++ {
+		w.Write([]byte("hello world"))
+		//}
 	})
 
 	http.ListenAndServe(":18080", nil)
 }
 
+func TestProxy1(t *testing.T) {
+	client := &http.Client{}
+	resp, err := client.Get("http://localhost:18081/")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	defer resp.Body.Close()
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return
+	}
+	println(string(data))
+}
+
 func TestProxy(t *testing.T) {
 	client := &http.Client{}
-	resp, err := client.Get("http://localhost:8080/")
+	resp, err := client.Get("http://localhost:18081/")
 	if err != nil {
 		t.Error(err)
 		return
