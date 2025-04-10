@@ -1,9 +1,9 @@
 device_id: "server-id-1"
 proxy:
-  signal_addr: "ws://localhost:8080/websocket/signal"
+  signal_addr: "wss://proxy.andarlucky.site/websocket/signal"
   username: "admin"
   password: "password"
   target_device_id: "server-id-2"
   tcp_proxy:
-    ":18081": "localhost:18080"
+    ":3389": "localhost:3389"
 

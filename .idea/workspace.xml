@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fb05d35-95e3-4557-97c5-13fcd48bb8d6" name="Changes" comment="refactor(app): 重构App结构和TCP代理逻辑&#10;feat(cmd/server.yaml): 添加TCP代理配置&#10;test: 更新测试用例以适应新逻辑&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置&#10;chore(go.mod): 更新Go版本到1.22.10">
-      <change beforePath="$PROJECT_DIR$/src/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proxy/tcp.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/proxy/tcp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/proxy_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/proxy_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server1.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server1.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +33,8 @@
     "Go Build.server.executor": "Debug",
     "Go Build.server1.executor": "Debug",
     "Go Build.signal.executor": "Run",
-    "Go Test.TestBuildAll in webrtc_proxy.executor": "Debug",
-    "Go Test.TestProxy in webrtc_proxy/test.executor": "Debug",
+    "Go Test.TestBuildAll in webrtc_proxy.executor": "Run",
+    "Go Test.TestProxy in webrtc_proxy/test.executor": "Run",
     "Go Test.TestProxy1 in webrtc_proxy/test.executor": "Run",
     "Go Test.TestServer in webrtc_proxy/test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -61,7 +61,7 @@
       <recent name="$PROJECT_DIR$/cmd" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestProxy in webrtc_proxy/test">
+  <component name="RunManager" selected="Go Test.TestBuildAll in webrtc_proxy">
     <configuration name="server" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="webrtc_proxy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -150,11 +150,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
         <item itemvalue="Go Test.TestProxy in webrtc_proxy/test" />
         <item itemvalue="Go Test.TestProxy1 in webrtc_proxy/test" />
         <item itemvalue="Go Test.TestServer in webrtc_proxy/test" />
         <item itemvalue="Go Build.signal" />
-        <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
       </list>
     </recent_temporary>
   </component>
@@ -174,7 +174,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744298662736</updated>
-      <workItem from="1744298665922" duration="12014000" />
+      <workItem from="1744298665922" duration="13151000" />
     </task>
     <task id="LOCAL-00001" summary="fix(app/webrtc): 修复连接处理和数据通道创建问题&#10;feat(cmd/server1.yaml): 添加新的服务器配置文件&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置">
       <option name="closed" value="true" />
@@ -192,7 +192,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744309404738</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="refactor(app): 重构App结构和TCP代理逻辑&#10;feat(cmd/server.yaml): 添加TCP代理配置&#10;test: 更新测试用例以适应新逻辑&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置&#10;chore(go.mod): 更新Go版本到1.22.10">
+      <option name="closed" value="true" />
+      <created>1744310781396</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744310781396</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,5 +213,21 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/proxy/tcp.go</url>
+          <line>54</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/proxy/tcp.go</url>
+          <line>50</line>
+          <option name="timeStamp" value="97" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
