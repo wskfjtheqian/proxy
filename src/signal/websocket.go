@@ -95,11 +95,24 @@ func (w *WebSocket) read() error {
 	if w.onOpen != nil {
 		go w.onOpen()
 	}
+	ticker := time.NewTicker(time.Second * 10)
+
 	defer func() {
 		if w.onClose != nil {
 			w.onClose()
 		}
+		ticker.Stop()
 	}()
+	go func() {
+		for range ticker.C {
+			err := w.conn.WriteMessage(websocket.PingMessage, []byte{})
+			if err != nil {
+				log.Println(err)
+				return
+			}
+		}
+	}()
+
 	for {
 		msg := Message{}
 		err := w.conn.ReadJSON(&msg)
