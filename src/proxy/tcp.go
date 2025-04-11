@@ -47,7 +47,7 @@ func (p *TCPProxy) ReadWriteData() {
 			_ = p.transfer.Close(p.proxyId)
 		}()
 		for {
-			buf := make([]byte, 1024*10)
+			buf := make([]byte, 1024*100)
 			n, err := p.conn.Read(buf)
 			if err != nil {
 				return

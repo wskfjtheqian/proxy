@@ -35,7 +35,7 @@ type WebRTCChannel struct {
 func NewWebRTCChannel(deviceId string, transfer Transfer) *WebRTCChannel {
 	ret := &WebRTCChannel{
 		deviceId:          deviceId,
-		channelCount:      1,
+		channelCount:      15,
 		iceList:           make([]webrtc.ICECandidateInit, 0),
 		iceGatheringState: make(chan webrtc.ICEGathererState),
 		channel:           make([]*webrtc.DataChannel, 0),

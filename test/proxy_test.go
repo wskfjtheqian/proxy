@@ -46,6 +46,7 @@ func TestProxy(t *testing.T) {
 		}
 		if err != nil {
 			t.Error(err)
+			return
 		}
 		downloadedSize += int64(n)
 		if downloadedSize > fileSize {
