@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0fb05d35-95e3-4557-97c5-13fcd48bb8d6" name="Changes" comment="fix: 更新代理地址和TCP代理配置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/channel/webrtc.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/channel/webrtc.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proxy/tcp.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/proxy/tcp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/proxy_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/proxy_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,50 +16,50 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2vXkAKAFu00Lflhoc44hO7U7rzs" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Go Build.go build webrtc_proxy/cmd.executor": "Debug",
-    "Go Build.server.executor": "Debug",
-    "Go Build.server1.executor": "Debug",
-    "Go Build.signal.executor": "Run",
-    "Go Test.TestBuildAll in webrtc_proxy.executor": "Run",
-    "Go Test.TestProxy in webrtc_proxy/test.executor": "Debug",
-    "Go Test.TestProxy1 in webrtc_proxy/test.executor": "Run",
-    "Go Test.TestServer in webrtc_proxy/test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "v2.0.0",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/dev/webrtc_proxy/cmd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Go Build.go build webrtc_proxy/cmd.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Build.server.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Build.server1.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Build.signal.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestBuildAll in webrtc_proxy.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestProxy in webrtc_proxy/test.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Test.TestProxy1 in webrtc_proxy/test.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestServer in webrtc_proxy/test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;v2.0.0&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dev/webrtc_proxy/cmd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/cmd" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestProxy in webrtc_proxy/test">
+  <component name="RunManager" selected="Go Build.server">
     <configuration name="server" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="webrtc_proxy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -175,7 +172,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744298662736</updated>
-      <workItem from="1744298665922" duration="15612000" />
+      <workItem from="1744298665922" duration="16660000" />
     </task>
     <task id="LOCAL-00001" summary="fix(app/webrtc): 修复连接处理和数据通道创建问题&#10;feat(cmd/server1.yaml): 添加新的服务器配置文件&#10;refactor(signal/websocket): 异步处理连接和消息&#10;refactor(project/settings): 更新项目设置和IDE配置">
       <option name="closed" value="true" />
@@ -209,7 +206,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744312077660</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix: 更新代理地址和TCP代理配置">
+      <option name="closed" value="true" />
+      <created>1744349706671</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744349706671</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix: 更新代理地址和TCP代理配置">
+      <option name="closed" value="true" />
+      <created>1744350195367</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744350195367</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,16 +236,5 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/test/proxy_test.go</url>
-          <line>29</line>
-          <option name="timeStamp" value="102" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
