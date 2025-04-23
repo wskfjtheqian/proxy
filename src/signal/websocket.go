@@ -138,7 +138,7 @@ type RequestConnect struct {
 	DeviceId string `json:"device_id"`
 }
 
-func (w *WebSocket) RequestSignal(deviceId string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
+func (w *WebSocket) OnRequestSignal(deviceId string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
 	data, err := json.Marshal(&RequestSignal{
 		DeviceId:   deviceId,
 		Candidates: *candidates,

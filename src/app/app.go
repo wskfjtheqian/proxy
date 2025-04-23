@@ -73,6 +73,9 @@ func (a *App) stop() {
 func (a *App) start() {
 	a.startSignal()
 	a.startProxy()
+	if a.signal != nil {
+		a.signal.AddChannel(a.config.DeviceId, a)
+	}
 }
 
 func (a *App) startSignal() {
@@ -106,6 +109,7 @@ func (a *App) startProxy() {
 		return a.channel.Send(data)
 	})
 
+	a.channel = channel.NewWebRTCChannel(a.config.DeviceId, a.transfer)
 	if 0 == strings.Index(config.SignalAddr, "ws://") || 0 == strings.Index(config.SignalAddr, "wss://") {
 		parse, err := url.Parse(config.SignalAddr)
 		if err != nil {
@@ -117,17 +121,11 @@ func (a *App) startProxy() {
 		query.Set("deviceId", a.config.DeviceId)
 
 		ws := signal.NewWebSocket(a.config.DeviceId)
-		a.channel = channel.NewWebRTCChannel(a.config.DeviceId, a.transfer)
-
 		a.channel.RequestSignal(func(candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
-			return ws.RequestSignal(config.TargetDeviceID, candidates)
+			return ws.OnRequestSignal(config.TargetDeviceID, candidates)
 		})
-		ws.OnResponseSignal(func(deviceId string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
-			return a.channel.Response(candidates)
-		})
-		ws.OnConnect(func(deviceId string) error {
-			return nil
-		})
+		ws.OnResponseSignal(a.OnRequestSignal)
+		ws.OnConnect(a.Connect)
 		ws.OnOpen(func() {
 			log.Println("signal websocket connected " + parse.String())
 			if len(config.TargetDeviceID) > 0 {
@@ -150,6 +148,30 @@ func (a *App) startProxy() {
 		err = ws.Dial(parse.String())
 		if err != nil {
 			log.Fatalln(err.Error() + " " + parse.String())
+		}
+	} else if 0 == strings.Index(config.SignalAddr, "http://") || 0 == strings.Index(config.SignalAddr, "https://") {
+		if len(config.TargetDeviceID) > 0 {
+			parse, err := url.Parse(config.SignalAddr)
+			if err != nil {
+				return
+			}
+			query := parse.Query()
+			query.Set("username", config.Username)
+			query.Set("password", config.Password)
+			query.Set("deviceId", a.config.DeviceId)
+
+			h := signal.NewHTTP(a.config.DeviceId)
+			h.SetUrl(parse)
+
+			a.channel = channel.NewWebRTCChannel(a.config.DeviceId, a.transfer)
+			a.channel.RequestSignal(func(candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
+				return h.RequestSignal(config.TargetDeviceID, candidates)
+			})
+
+			err = a.channel.Request()
+			if err != nil {
+				return
+			}
 		}
 	} else {
 		log.Fatalln("unsupported signal addr:", config.SignalAddr)
@@ -226,4 +248,12 @@ func (a *App) listenTcpProxy(src string, dest string) error {
 		a.proxyMap[proxyId] = p
 		a.proxyLock.Unlock()
 	}
+}
+
+func (a *App) Connect(deviceId string) error {
+	return nil
+}
+
+func (a *App) OnRequestSignal(deviceId string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
+	return a.channel.Response(candidates)
 }

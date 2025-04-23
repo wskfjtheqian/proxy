@@ -9,13 +9,19 @@ import (
 	"webrtc_proxy/src/channel"
 )
 
+type Connect interface {
+	Connect(deviceId string) error
+
+	OnRequestSignal(deviceId string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error)
+}
+
 type SignalOption func(*Signal)
 
 func NewSignal(options ...SignalOption) *Signal {
 	ret := &Signal{
 		mux:         http.NewServeMux(),
 		usernameMap: make(map[string]string),
-		wsMap:       make(map[string]*WebSocket),
+		wsMap:       make(map[string]Connect),
 		wsLock:      sync.RWMutex{},
 	}
 
@@ -33,7 +39,7 @@ type Signal struct {
 	mux         *http.ServeMux
 	addr        string
 	usernameMap map[string]string
-	wsMap       map[string]*WebSocket
+	wsMap       map[string]Connect
 	wsLock      sync.RWMutex
 }
 
@@ -103,25 +109,58 @@ func (s *Signal) websocketHandler(writer http.ResponseWriter, request *http.Requ
 	})
 	ws.OnConnect(func(targetDeviceID string) error {
 		s.wsLock.RLock()
-		ws, ok := s.wsMap[targetDeviceID]
+		c, ok := s.wsMap[targetDeviceID]
 		s.wsLock.RUnlock()
 		if !ok {
 			return fmt.Errorf("Device %s not found", targetDeviceID)
 		}
-		return ws.Connect(deviceId)
+		return c.Connect(deviceId)
 	})
 	ws.OnResponseSignal(func(targetDeviceID string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
 		s.wsLock.RLock()
-		ws, ok := s.wsMap[targetDeviceID]
+		c, ok := s.wsMap[targetDeviceID]
 		s.wsLock.RUnlock()
 		if !ok {
 			return nil, fmt.Errorf("Device %s not found", targetDeviceID)
 		}
-		return ws.RequestSignal(deviceId, candidates)
+		return c.OnRequestSignal(deviceId, candidates)
 	})
 	ws.ServeHTTP(writer, request)
 }
 
 func (s *Signal) httpHandler(writer http.ResponseWriter, request *http.Request) {
+	query := request.URL.Query()
+	username := query.Get("username")
+	password := query.Get("password")
+	deviceId := query.Get("deviceId")
 
+	if username == "" || deviceId == "" || password == "" {
+		log.Println("Invalid request" + request.URL.String())
+		writer.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if s.usernameMap[username] != password {
+		log.Println("Invalid username or password" + request.URL.String())
+		writer.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
+	h := NewHTTP(deviceId)
+	h.OnResponseSignal(func(targetDeviceID string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
+		s.wsLock.RLock()
+		c, ok := s.wsMap[targetDeviceID]
+		s.wsLock.RUnlock()
+		if !ok {
+			return nil, fmt.Errorf("Device %s not found", targetDeviceID)
+		}
+		return c.OnRequestSignal(deviceId, candidates)
+	})
+	h.ServeHTTP(writer, request)
+}
+
+func (s *Signal) AddChannel(deviceId string, connect Connect) {
+	s.wsLock.Lock()
+	s.wsMap[deviceId] = connect
+	s.wsLock.Unlock()
 }
