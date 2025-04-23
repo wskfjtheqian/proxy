@@ -327,7 +327,7 @@ func (r *RTC) addConn(con net.Conn, target string) (*Proxy, error) {
 	select {
 	case resp := <-response:
 		if resp != "ok" {
-			return nil, fmt.Errorf("open request failed: %s", response)
+			return nil, fmt.Errorf("open request failed: %s", resp)
 		}
 	case <-r.close:
 		return nil, fmt.Errorf("close requested")

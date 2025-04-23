@@ -1,5 +1,5 @@
 proxy_addr:
-  ":8916": "127.0.0.1:3389"
+  ":3389": "127.0.0.1:8000"
 
-#base_url: "https://kpohss--9090.ap-guangzhou.cloudstudio.work"
-base_url: "http://192.168.44.128:8089"
+base_url: "https://kpohss--8089.ap-guangzhou.cloudstudio.work"
+#base_url: "http://192.168.44.128:8089"
