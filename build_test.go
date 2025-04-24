@@ -1,8 +1,11 @@
-package server
+package hbuf
 
 import (
+	"archive/zip"
+	"io"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"testing"
 )
 
@@ -26,10 +29,10 @@ func gitVersion() string {
 }
 
 // 编译程序
-func build(t *testing.T, out string, in string, env ...string) error {
+func build(t *testing.T, out string, env ...string) error {
 	version := gitVersion()
 
-	cmd := exec.Command("go", "build", "-ldflags", "-X main.version="+version, "-o", out, in)
+	cmd := exec.Command("go", "build", "-ldflags", "-X main.version="+version, "-o", out, "./cmd/main.go")
 	env = append(os.Environ(), env...)
 	cmd.Env = append(cmd.Env, env...)
 	cmd.Dir = "./"
@@ -67,6 +70,40 @@ func copyFile(t *testing.T, src, dst string) {
 	}
 }
 
+// 使用GO代码打包ZIP文件
+func buildZip(t *testing.T, src, dst string) {
+	zipFile, err := os.Create(dst)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	defer zipFile.Close()
+
+	w := zip.NewWriter(zipFile)
+	defer w.Close()
+
+	srcFile, err := os.Open(src)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	defer srcFile.Close()
+	f, err := w.Create(filepath.Base(src))
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	_, err = io.Copy(f, srcFile)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Log("Building zip file from " + src + " to " + dst)
+
+}
+
 type BuildConfig struct {
 	GOOS   string
 	GOARCH string
@@ -88,11 +125,17 @@ func TestBuildAll(t *testing.T) {
 		{"windows", "arm", ".exe"},
 	}
 
+	version := gitVersion()
 	for _, config := range list {
 		t.Log("Building server for " + config.GOOS + "/" + config.GOARCH)
-		err := build(t, "./bin/proxy_"+config.GOOS+"_"+config.GOARCH+config.Ext, "./cmd", "GOOS="+config.GOOS, "GOARCH="+config.GOARCH, "CGO_ENABLED=0")
+
+		bin := "./bin/proxy" + config.Ext
+		err := build(t, bin, "GOOS="+config.GOOS, "GOARCH="+config.GOARCH, "CGO_ENABLED=0")
 		if err != nil {
 			t.Error(err)
 		}
+
+		buildZip(t, bin, "./bin/"+config.GOOS+"_"+config.GOARCH+"_"+version+".zip")
+		_ = os.Remove(bin)
 	}
 }

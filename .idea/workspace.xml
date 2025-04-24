@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8734dd27-7e41-4103-814b-e24d7837ca9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/webrtc_proxy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webrtc_proxy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/server.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/server1.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server1.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signal/http.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/signal/http.go" afterDir="false" />
-    </list>
+    <list default="true" id="8734dd27-7e41-4103-814b-e24d7837ca9b" name="Changes" comment="fix: 更新配置参数和修复HTTP请求逻辑" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +46,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Go Build.client">
+  <component name="RunManager" selected="Go Test.TestBuildAll in webrtc_proxy">
     <configuration name="client" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="webrtc_proxy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -75,12 +67,25 @@
       <filePath value="$PROJECT_DIR$/cmd/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="TestBuildAll in webrtc_proxy" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webrtc_proxy" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="webrtc_proxy" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestBuildAll\E$" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Go Build.client" />
       <item itemvalue="Go Build.server" />
+      <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
         <item itemvalue="Go Build.server" />
       </list>
     </recent_temporary>
@@ -101,12 +106,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1745507283431</updated>
-      <workItem from="1745507285589" duration="2061000" />
+      <workItem from="1745507285589" duration="2370000" />
     </task>
+    <task id="LOCAL-00001" summary="fix: 更新配置参数和修复HTTP请求逻辑">
+      <option name="closed" value="true" />
+      <created>1745509378100</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745509378100</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix: 更新配置参数和修复HTTP请求逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 更新配置参数和修复HTTP请求逻辑" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
