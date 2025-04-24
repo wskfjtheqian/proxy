@@ -1,6 +1,10 @@
 device_id: "server-id-2"
 proxy:
-  signal_addr: "wss://proxy.andarlucky.site/websocket/signal"
+#  signal_addr: "wss://proxy.andarlucky.site/websocket/signal"
   username: "admin"
   password: "password"
 
+signal:
+  addr: ":8080"
+  user_pass:
+    "admin": "password"

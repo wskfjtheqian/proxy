@@ -14,7 +14,7 @@ const NAME = "proxy application"
 func main() {
 	log.Printf("%s version: %s", NAME, VERSION)
 
-	configFile := flag.String("config", "config.yml", "path to config file")
+	configFile := flag.String("c", "config.yml", "path to config file")
 	flag.Parse()
 
 	file, err := os.Open(*configFile)

@@ -158,7 +158,8 @@ func (a *App) startProxy() {
 			query := parse.Query()
 			query.Set("username", config.Username)
 			query.Set("password", config.Password)
-			query.Set("deviceId", a.config.DeviceId)
+			query.Set("deviceId", config.TargetDeviceID)
+			parse.RawQuery = query.Encode()
 
 			h := signal.NewHTTP(a.config.DeviceId)
 			h.SetUrl(parse)
@@ -173,8 +174,8 @@ func (a *App) startProxy() {
 				return
 			}
 		}
-	} else {
-		log.Fatalln("unsupported signal addr:", config.SignalAddr)
+		//} else {
+		//	log.Fatalln("unsupported signal addr:", config.SignalAddr)
 	}
 
 	if len(config.TcpProxy) > 0 {

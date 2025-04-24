@@ -3,9 +3,9 @@ package signal
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/url"
-	"path"
 	"webrtc_proxy/src/channel"
 )
 
@@ -51,9 +51,6 @@ func (h *HTTP) SetUrl(url *url.URL) {
 }
 
 func (h *HTTP) RequestSignal(deviceId string, candidates *channel.SessionAndICECandidates) (*channel.SessionAndICECandidates, error) {
-	u := *h.url
-
-	u.Path = path.Join(u.Path, deviceId)
 	req := &bytes.Buffer{}
 	err := json.NewEncoder(req).Encode(candidates)
 	if err != nil {
@@ -69,6 +66,9 @@ func (h *HTTP) RequestSignal(deviceId string, candidates *channel.SessionAndICEC
 	}
 	defer response.Body.Close()
 
+	if response.StatusCode != http.StatusOK {
+		return nil, errors.New(response.Status)
+	}
 	var aic channel.SessionAndICECandidates
 	err = json.NewDecoder(response.Body).Decode(&aic)
 	if err != nil {
