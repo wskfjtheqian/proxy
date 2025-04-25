@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8734dd27-7e41-4103-814b-e24d7837ca9b" name="Changes" comment="fix: 更新配置参数和修复HTTP请求逻辑" />
+    <list default="true" id="8734dd27-7e41-4103-814b-e24d7837ca9b" name="Changes" comment="fix: 更新配置参数和修复HTTP请求逻辑">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server1.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server1.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/proxy_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/proxy_test.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,39 +19,43 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2wBFuRDk9Y3UdT5zHUPbXUG7BRn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Go Build.client.executor": "Debug",
-    "Go Build.go build main.go.executor": "Run",
-    "Go Build.go build webrtc_proxy/cmd.executor": "Debug",
-    "Go Build.server.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "v2.0.0",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Go Build.client.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Build.go build main.go.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build webrtc_proxy/cmd.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Build.server.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Test.TestBuildAll in webrtc_proxy.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestProxy in webrtc_proxy/test.executor&quot;: &quot;Run&quot;,
+    &quot;Go Test.TestProxySpeed in webrtc_proxy/test.executor&quot;: &quot;Debug&quot;,
+    &quot;Go Test.TestServer in webrtc_proxy/test.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;v2.0.0&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Go Test.TestBuildAll in webrtc_proxy">
+}</component>
+  <component name="RunManager" selected="Go Build.client">
     <configuration name="client" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="webrtc_proxy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -78,15 +87,57 @@
       <pattern value="^\QTestBuildAll\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestProxy in webrtc_proxy/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webrtc_proxy" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="webrtc_proxy/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestProxy\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestProxySpeed in webrtc_proxy/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webrtc_proxy" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="webrtc_proxy/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestProxySpeed\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestServer in webrtc_proxy/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="webrtc_proxy" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="webrtc_proxy/test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestServer\E$" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Go Build.client" />
       <item itemvalue="Go Build.server" />
       <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
+      <item itemvalue="Go Test.TestProxy in webrtc_proxy/test" />
+      <item itemvalue="Go Test.TestProxySpeed in webrtc_proxy/test" />
+      <item itemvalue="Go Test.TestServer in webrtc_proxy/test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Test.TestBuildAll in webrtc_proxy" />
+        <item itemvalue="Go Test.TestProxySpeed in webrtc_proxy/test" />
         <item itemvalue="Go Build.server" />
+        <item itemvalue="Go Test.TestServer in webrtc_proxy/test" />
+        <item itemvalue="Go Test.TestProxy in webrtc_proxy/test" />
       </list>
     </recent_temporary>
   </component>
@@ -106,7 +157,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1745507283431</updated>
-      <workItem from="1745507285589" duration="2370000" />
+      <workItem from="1745507285589" duration="7966000" />
+      <workItem from="1745589237339" duration="41000" />
     </task>
     <task id="LOCAL-00001" summary="fix: 更新配置参数和修复HTTP请求逻辑">
       <option name="closed" value="true" />
@@ -116,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745509378100</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix: 更新配置参数和修复HTTP请求逻辑">
+      <option name="closed" value="true" />
+      <created>1745509834072</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745509834072</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,19 +193,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/signal/http.go</url>
-          <line>69</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/test/proxy_test.go</url>
+          <line>53</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/signal/http.go</url>
-          <line>73</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/test/proxy_test.go</url>
+          <line>62</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/signal/http.go</url>
-          <line>33</line>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/src/app/app.go</url>
+          <line>236</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/app/app.go</url>
+          <line>243</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

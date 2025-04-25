@@ -1,10 +1,15 @@
 device_id: "server-id-1"
 proxy:
 #  signal_addr: "wss://proxy.andarlucky.site/websocket/signal"
-  signal_addr: "http://localhost:8080/http/signal"
+  signal_addr: "https://kpohss--8080.ap-guangzhou.cloudstudio.work/http/signal"
+#  signal_addr: "http://localhost:8080/http/signal"
   username: "admin"
   password: "password"
   target_device_id: "server-id-2"
   tcp_proxy:
-    ":3389": "localhost:3389"
+#    ":7456": "localhost:7456"
+#    ":3389": "localhost:3389"
+#    ":8000": "localhost:8000"
+#    ":18081": "localhost:18080"
+
 

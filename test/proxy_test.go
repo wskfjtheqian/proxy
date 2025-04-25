@@ -17,7 +17,7 @@ func init() {
 
 func TestServer(t *testing.T) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		for i := 0; i < 1024; i++ {
+		for i := 0; i < 10240; i++ {
 			w.Write(testData)
 		}
 	})
@@ -25,7 +25,7 @@ func TestServer(t *testing.T) {
 	http.ListenAndServe(":18080", nil)
 }
 
-func TestProxy(t *testing.T) {
+func TestProxySpeed(t *testing.T) {
 	client := &http.Client{}
 	resp, err := client.Get("http://localhost:18081/")
 	if err != nil {
@@ -35,7 +35,7 @@ func TestProxy(t *testing.T) {
 	defer resp.Body.Close()
 
 	//下载文件并显示下载速度
-	fileSize := int64(len(testData) * 1024)
+	fileSize := int64(len(testData) * 10240)
 	downloadedSize := int64(0)
 	startTime := time.Now()
 	for {
